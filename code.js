@@ -38,6 +38,7 @@ function renderGrid(rowSize) {
             e.target.style.backgroundColor = e.ctrlKey ? 'white' : getDrawColor(e.target.style.backgroundColor);
         });
         grid.addEventListener('mousedown', (e) => {
+            e.preventDefault();
             e.target.style.backgroundColor = e.ctrlKey ? 'white' : getDrawColor(e.target.style.backgroundColor);
         })
         gridBg.appendChild(grid);
@@ -56,12 +57,15 @@ function getDrawColor(currentColor) {
             color = `rgb(${randomValue(255)}, ${randomValue(255)}, ${randomValue(255)})`;
             break;
         case 'dimmed':
+            
             if (!currentColor.length) {
                 color = "rgba(0, 0, 0, 0.1)";
                 break;
             }
-            const currentAlpha = Number(currentColor.split(/\((.*?)\)/)[1].split(',').pop());
-            color = `rgba(0, 0, 0, ${Math.min(currentAlpha + 0.1, 1)})`;
+            let alpha = Number(currentColor.split(/\((.*?)\)/)[1].split(',').pop());
+            // Browser automatically converts rgba to rgb if alpha hits >= 1 and alpha resets 🙄
+            alpha = alpha + 0.1 >= 1 ? 0.99 : alpha + 0.1; 
+            color = `rgba(0, 0, 0, ${alpha})`;
             break;
         case 'standard':
         default:

@@ -1,9 +1,11 @@
 const CONTAINER_SIZE = 600;
+const DRAW_MODES = ['standard', 'dimmed', 'rainbow']
 const container = document.querySelector(".grid-container");
 const sizeInput = document.querySelector("#row-size");
-const setBtn = document.querySelector(".set-btn");
+const form = document.querySelector("form");
 
 let isDrawing = false;
+let drawingMode = 'standard';
 
 document.querySelector(".main").addEventListener('mouseup', () => {
     isDrawing = false;
@@ -12,13 +14,18 @@ container.style.minHeight = `${CONTAINER_SIZE}px`;
 container.style.minWidth = `${CONTAINER_SIZE}px`;
 container.addEventListener('mousedown', () => isDrawing = true);
 container.addEventListener('mouseup', () => isDrawing = false);
-setBtn.addEventListener('click', (e) => {
+form.addEventListener('submit', (e) => {
+    const data = new FormData(form);
+    for (const entry of data) {
+        console.log(entry);
+    }
+    renderGrid(Number(data.get("row-size")));
+    drawingMode = data.get("draw-mode");
+    
     e.preventDefault();
-    renderGrid(Number(sizeInput.value));
 });
 
-function renderGrid(rowSize)
-{
+function renderGrid(rowSize) {
     if (rowSize < 0 || rowSize > 100) return;
     container.innerHTML = '';
     const gridSize = Math.floor(CONTAINER_SIZE / rowSize);
@@ -32,13 +39,30 @@ function renderGrid(rowSize)
         grid.style.flexBasis = `${gridSize}px`;
         grid.addEventListener('mouseover', (e) => {
             if (!isDrawing) return;
-
-            e.target.style.backgroundColor = e.ctrlKey ? 'white' : 'black';
+            e.target.style.backgroundColor = e.ctrlKey ? 'white' : getDrawColor();
         });
         grid.addEventListener('mousedown', (e) => {
-            e.target.style.backgroundColor = e.ctrlKey ? 'white' : 'black';
+            e.target.style.backgroundColor = e.ctrlKey ? 'white' : getDrawColor();
         })
         gridBg.appendChild(grid);
     }
     container.appendChild(gridBg);
+}
+
+function randomValue(maxInclusive) {
+    return Math.floor(Math.random() * (maxInclusive + 1));
+}
+
+function getDrawColor() {
+    let color;
+    switch (drawingMode) {
+        case 'rainbow':
+            color = `rgb(${randomValue(255)}, ${randomValue(255)}, ${randomValue(255)})`;
+            break;
+        case 'standard':
+        default:
+            color = "black"
+            break;
+        }
+    return color;
 }

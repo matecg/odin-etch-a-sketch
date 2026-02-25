@@ -1,7 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Poiret+One&family=Story+Script&display=swap');
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: "Poiret One", sans-serif;
+}
+
+h1 {
+    font-family: "Story Script", sans-serif;
+    font-size: 36px;
+    text-align: center;
+    margin-top: 30px;
+}
+
+label {
+    color: darkslategray;
+    font-weight: 600;
+    letter-spacing: 2px;
+}
+
+button {
+    background-color: cornflowerblue;
+    border: 0;
+    padding: 5px 15px;
+    border-radius: 4px;
+    font-size: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    /* flex: 1; */
+    flex-basis: 150px;
+}
+
+form {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 600px;
+    gap: 30px;
+    align-items: center;
+    justify-content: center;
+}
+
+fieldset {
+    padding: 5px 20px;
+}
+
+input[type="number"] {
+    font-size: 20px;
+    text-align: center;
+    font-family: "Story Script", sans-serif;
+    border: 0;
+    background-color: white;
+    border-radius: 4px;
 }
 
 .main {
@@ -34,19 +84,22 @@
 .instructions-container span {
     color: darkslateblue;
     font-weight: 700;
-    font-size: 18px;
+    font-size: 20px;
+    font-family: "Story Script", sans-serif;
+    letter-spacing: 2px;
+    font-style: normal;
 }
 
 .instructions-container li {
     width: 600px;
     font-style: italic;
-    font-weight: 400;
+    font-weight: 600;
     list-style-type: none;
     color: darkslategray;
 }
 
 .draw-mode {
     display:flex;
-    gap: 40px;
-    padding: 5px 20px;
+    gap: 10px;
+    flex-direction: column;
 }

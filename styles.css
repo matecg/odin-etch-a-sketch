@@ -10,6 +10,7 @@
     justify-content: center;
     align-items: center;
     gap: 30px;
+    background-color: aliceblue;
 }
 
 .grid-container {
@@ -21,9 +22,25 @@
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    background-color: aliceblue;
+    background-color: white;
 }
 
 .square {
     border: 1px solid lightgray;
+}
+
+.instructions-container p,
+.instructions-container span {
+    color: darkslateblue;
+    font-weight: 700;
+    font-size: 18px;
+}
+
+.instructions-container li {
+    
+    width: 600px;
+    font-style: italic;
+    font-weight: 400;
+    list-style-type: none;
+    color: darkslategray;
 }

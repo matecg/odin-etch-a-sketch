@@ -9,18 +9,21 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: 30px;
 }
 
-.container {
+.grid-container {
+    border: 2px solid black;
+    margin-bottom: 30px;
+}
+
+.grid-bg {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    width: 600px;
-    padding: 20px 100px;
+    background-color: aliceblue;
 }
 
 .square {
-    flex-basis: 32px;
-    height: 32px;
     border: 1px solid lightgray;
 }

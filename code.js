@@ -1,7 +1,5 @@
 const CONTAINER_SIZE = 600;
-const DRAW_MODES = ['standard', 'dimmed', 'rainbow']
 const container = document.querySelector(".grid-container");
-const sizeInput = document.querySelector("#row-size");
 const form = document.querySelector("form");
 
 let isDrawing = false;
@@ -16,9 +14,7 @@ container.addEventListener('mousedown', () => isDrawing = true);
 container.addEventListener('mouseup', () => isDrawing = false);
 form.addEventListener('submit', (e) => {
     const data = new FormData(form);
-    for (const entry of data) {
-        console.log(entry);
-    }
+
     renderGrid(Number(data.get("row-size")));
     drawingMode = data.get("draw-mode");
     
@@ -39,10 +35,10 @@ function renderGrid(rowSize) {
         grid.style.flexBasis = `${gridSize}px`;
         grid.addEventListener('mouseover', (e) => {
             if (!isDrawing) return;
-            e.target.style.backgroundColor = e.ctrlKey ? 'white' : getDrawColor();
+            e.target.style.backgroundColor = e.ctrlKey ? 'white' : getDrawColor(e.target.style.backgroundColor);
         });
         grid.addEventListener('mousedown', (e) => {
-            e.target.style.backgroundColor = e.ctrlKey ? 'white' : getDrawColor();
+            e.target.style.backgroundColor = e.ctrlKey ? 'white' : getDrawColor(e.target.style.backgroundColor);
         })
         gridBg.appendChild(grid);
     }
@@ -53,11 +49,19 @@ function randomValue(maxInclusive) {
     return Math.floor(Math.random() * (maxInclusive + 1));
 }
 
-function getDrawColor() {
+function getDrawColor(currentColor) {
     let color;
     switch (drawingMode) {
         case 'rainbow':
             color = `rgb(${randomValue(255)}, ${randomValue(255)}, ${randomValue(255)})`;
+            break;
+        case 'dimmed':
+            if (!currentColor.length) {
+                color = "rgba(0, 0, 0, 0.1)";
+                break;
+            }
+            const currentAlpha = Number(currentColor.split(/\((.*?)\)/)[1].split(',').pop());
+            color = `rgba(0, 0, 0, ${Math.min(currentAlpha + 0.1, 1)})`;
             break;
         case 'standard':
         default:

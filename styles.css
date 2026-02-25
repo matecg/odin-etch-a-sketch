@@ -27,6 +27,7 @@
 
 .square {
     border: 1px solid lightgray;
+    background-color: white;
 }
 
 .instructions-container p,
@@ -37,7 +38,6 @@
 }
 
 .instructions-container li {
-    
     width: 600px;
     font-style: italic;
     font-weight: 400;

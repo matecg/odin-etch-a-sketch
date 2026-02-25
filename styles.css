@@ -44,3 +44,9 @@
     list-style-type: none;
     color: darkslategray;
 }
+
+.draw-mode {
+    display:flex;
+    gap: 40px;
+    padding: 5px 20px;
+}

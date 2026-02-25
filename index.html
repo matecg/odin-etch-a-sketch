@@ -11,10 +11,28 @@
     <div>
       <h1>Etch a Sketch</h1>
       <form action="POST">
-        <label for="row-size">
-          Row size:
-          <input type="number" name="row-size" id="row-size" min="0" max="100" value="0">
-        </label>
+        <fieldset>
+          <legend>Select the number of tiles per row (max. 100):</legend>
+          <label for="row-size">
+            Row size:
+            <input type="number" name="row-size" id="row-size" min="0" max="100" value="0">
+          </label>
+        </fieldset>
+        <fieldset class="draw-mode">
+          <legend>Select the drawing mode</legend>
+          <div>
+            <input type="radio" name="draw-mode" id="standard" value="standard" checked>
+            <label for="standard">Standard</label>
+          </div>
+          <div>
+            <input type="radio" name="draw-mode" id="dimmed" value="dimmed">
+            <label for="dimmed">Dimmed</label>
+          </div>
+          <div>
+            <input type="radio" name="draw-mode" id="rainbow" value="rainbow">
+            <label for="rainbow">Rainbow</label>
+          </div>
+        </fieldset>
         <button type="submit" class="set-btn">Set</button>
       </form>
     </div>

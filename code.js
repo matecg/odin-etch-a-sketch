@@ -57,8 +57,7 @@ function getDrawColor(currentColor) {
             color = `rgb(${randomValue(255)}, ${randomValue(255)}, ${randomValue(255)})`;
             break;
         case 'dimmed':
-            
-            if (!currentColor.length) {
+            if (!currentColor.length || currentColor === 'white') {
                 color = "rgba(0, 0, 0, 0.1)";
                 break;
             }
